@@ -14,12 +14,17 @@ jobs:
   build:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "hashicorp/setup-terraform@v3"
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+      - name: "Setup terraform"
+        uses: "hashicorp/setup-terraform@v3"
         with:
           terraform_wrapper: false
-      - id: "init"
+      - name: "version"
+        run: terraform --version
+      - name: "init"
         run: terraform init
-      - id: "validate"
+      - name: "validate"
         run: terraform validate
-      - id: "test"
+      - name: "test"
         run: terraform test
